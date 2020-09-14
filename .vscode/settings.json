@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/4d00b8c8-c6f0-4919-ab81-3446a40d0983/resourceGroups/VirtualPub/providers/Microsoft.Web/sites/virtualpub",
+    "appService.deploySubpath": "."
+}
