@@ -31,13 +31,11 @@ io.on("connection", socket => {
     /* console.log(`connected ${socket.id}`); */
 
     socket.on("join-room", (roomId, userId) => {
-        console.log(roomId, userId);
         socket.join(roomId);
         socket.to(roomId).broadcast.emit("user-connected", userId);
     });
 
-/*     socket.on('disconnect', () => {
-        console.log("user is disconnected");
-        socket.to(roomId).broadcast.emit('user-disconnected', userId)
-    }); */
+    socket.on("sound-effect", roomId => {
+        io.sockets.to(roomId).emit("sound-effect")
+    });
 });

@@ -1,6 +1,8 @@
 const socket = io.connect("/");
 const peer = new Peer();
 const videoGrid = document.querySelector("#video-grid");
+const controlBtn = document.querySelector(".action-btn");
+
 
 const peers = {};
 
@@ -26,15 +28,21 @@ navigator.mediaDevices.getUserMedia({
     });
 });
 
-/* socket.on("user-disconnected", userId => {
-    console.log(userId);
-}); */
 
 peer.on("open", id => {
     console.log("open");
     socket.emit("join-room", ROOM_ID, id);
 });
 
+
+controlBtn.addEventListener("click", () => {
+    socket.emit("sound-effect", ROOM_ID);
+});
+
+socket.on("sound-effect", () => {
+    const audio = document.querySelector(".cheers");
+    audio.play();
+});
 
 
 function connectToNewUser(userId, stream) {
