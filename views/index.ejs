@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="room1">Room 1</button>
+    <button id="room2">Room 2</button>
+
+
+    <script>
+        const origin = window.location.origin;
+
+        const buttons = {
+            button1: document.querySelector("#room1"),
+            button2: document.querySelector("#room2")
+        }
+        
+        const ids = ["room1", "room2"]
+        
+        for (let i = 0; i < Object.keys(buttons).length; i++) {
+            let button = Object.keys(buttons)[i]
+            let id = ids[i]
+            button.addEventListener("click", (id) => {
+                const url = origin + "/" + id;
+                window.location.href = url;
+            }); 
+        }
+
+    </script>
+</body>
+</html>
