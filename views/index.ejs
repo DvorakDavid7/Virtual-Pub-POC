@@ -3,14 +3,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .container{
+            text-align: center;
+            padding: 10;
+        }
+
+        .buttons{
+            padding: 20px;
+            margin: 10px;
+
+        }
+    </style>
 </head>
 <body>
-    <button id="room1">Room 1</button>
-    <button id="room2">Room 2</button>
-
-
+    <div class="container">
+        <h3>Select room:</h3>
+        <div>
+            <button class="buttons" id="room1">V.I.P PRIVATE</button>
+        </div>
+        <div>
+            <button class="buttons" id="room2">BRO CHAT</button>
+        </div>
+    </div>
     <script>
         const origin = window.location.origin;
+        async function checkPass(password) {
+            const response = await fetch(`${origin}/authorization`, {
+                method: "POST",
+                body: JSON.stringify({
+                    "password": password
+                })  
+            })
+            console.log(response);
+        }
+        
 
         const buttons = {
             button1: document.querySelector("#room1"),
@@ -20,11 +48,19 @@
         const ids = ["room1", "room2"]
         
         for (let i = 0; i < Object.keys(buttons).length; i++) {
-            let button = Object.keys(buttons)[i]
-            let id = ids[i]
-            button.addEventListener("click", (id) => {
-                const url = origin + "/" + id;
-                window.location.href = url;
+            let button = buttons[Object.keys(buttons)[i]]
+            console.log(button)
+            button.addEventListener("click", () => {
+                let id = ids[i];
+                const url = origin + "/" + id; 
+                if (id == "room1") {
+                    let password = prompt("Insert password: ");
+                    console.log(password);
+                    checkPass(password);
+                    
+
+                }
+                //window.location.href = url;
             }); 
         }
 

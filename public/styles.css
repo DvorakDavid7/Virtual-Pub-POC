@@ -4,8 +4,16 @@ body, html {
 }
 
 
-.bg {
+.pub {
     background-image: url("./images/tavern2.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.club {
+    background-image: url("./images/club.jpg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
