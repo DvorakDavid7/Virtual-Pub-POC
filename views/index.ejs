@@ -29,40 +29,54 @@
     </div>
     <script>
         const origin = window.location.origin;
-        async function checkPass(password) {
-            const response = await fetch(`${origin}/authorization`, {
-                method: "POST",
-                body: JSON.stringify({
-                    "password": password
-                })  
-            })
-            console.log(response);
-        }
-        
 
+        
         const buttons = {
             button1: document.querySelector("#room1"),
             button2: document.querySelector("#room2")
         }
         
         const ids = ["room1", "room2"]
-        
-        for (let i = 0; i < Object.keys(buttons).length; i++) {
-            let button = buttons[Object.keys(buttons)[i]]
-            console.log(button)
-            button.addEventListener("click", () => {
-                let id = ids[i];
-                const url = origin + "/" + id; 
-                if (id == "room1") {
-                    let password = prompt("Insert password: ");
-                    console.log(password);
-                    checkPass(password);
-                    
 
+        async function checkIfPasswordIsCorrect(password) {
+            let data = {
+                    password: password
                 }
-                //window.location.href = url;
-            }); 
+            let status = undefined
+            const response = await fetch(`${origin}/authorization`, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            const responseData = await response.json();
+            return responseData.authenticate // returns true or false
         }
+
+        
+        function main() {
+            for (let i = 0; i < Object.keys(buttons).length; i++) {
+                let button = buttons[Object.keys(buttons)[i]]
+                button.addEventListener("click", async () => {
+                    let id = ids[i];
+                    const url = origin + "/" + id; 
+                    if (id == "room1") {
+                        let password = prompt("Insert password: ");
+                        let isAuthorized = await checkIfPasswordIsCorrect(password);
+                        console.log(isAuthorized);
+                        if (isAuthorized) {
+                            window.location.href = url;
+                        }
+                        else {
+                            alert("Invalid Password")
+                        }
+                    }
+                }); 
+            }
+        }
+
+        main();
 
     </script>
 </body>
