@@ -5,26 +5,57 @@
     <title>Document</title>
 
     <style>
+
+        *:focus {
+        outline: none;
+        }
+
+        h3 {
+            font-size: 40px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: rgba(255, 255, 255, .15);  
+            text-shadow: black 1px 1px;       
+        }
+        
+        body {
+            background-image: url("./images/fron_image.jpg");
+        }
+
+        button {
+            background-color: rgba(255, 255, 255, .15);  
+            backdrop-filter: blur(1.5px);
+            font-size: large;
+            font-weight: 600;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            border: 2px black solid;            
+        }
+
+        button:hover {backdrop-filter: blur(0px);}
+        button:active {outline: none; opacity: 0.5; backdrop-filter: blur(2px); transition: 0.5s;}
+
         .container{
             text-align: center;
             padding: 10;
         }
-
         .buttons{
             padding: 20px;
             margin: 10px;
-
         }
+ 
+
     </style>
+
 </head>
 <body>
     <div class="container">
-        <h3>Select room:</h3>
+
+        <h3>Where are you heading ?</h3>
+
         <div>
-            <button class="buttons" id="room1">V.I.P PRIVATE</button>
+            <button class="buttons" id="room1">BROTHEL</button>
         </div>
         <div>
-            <button class="buttons" id="room2">BRO CHAT</button>
+            <button class="buttons" id="room2" style="">CITY PUB</button>
         </div>
     </div>
     <script>
